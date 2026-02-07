@@ -1,32 +1,48 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-export const SignupCard = () => {
+import { LucideLoader2 , TriangleAlert } from 'lucide-react';
+import {FaCheck} from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
+export const SignupCard = ({isPending , isSuccess , validationError , signupForm , setSignupForm , error , onSignupFormSubmit}) => {
     const navigate = useNavigate();
-    const [signupForm, setSignupForm] = useState({
-        email: '',
-        password: '',
-        confirmPassword:'',
-        username: ''
-    });
+
     return (
         <Card className="w-full h-full">
             <CardHeader>
                 <CardTitle> Sign up</CardTitle>
                 <CardDescription> Sign up to access your account</CardDescription>
+                {validationError && (
+                    <div className="bg-destructive/15 p-4 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6">
+                        <TriangleAlert className="size-5"/>
+                        <p>{validationError.message }</p>
+                    </div>
+                )}
+                {error && (
+                    <div className="bg-destructive/15 p-4 rounded-md flex items-center gap-x-2 text-sm text-destructive mb-6">
+                        <TriangleAlert className="size-5"/>
+                        <p>{error.message }</p>
+                    </div>
+                )}
+                {isSuccess && (
+                    <div className="bg-primary/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-primary mb-5">
+                        <FaCheck className="size-5"/>
+                        <p>Successfully signed up . you will be redirected to login page in few secondes</p>
+                        <LucideLoader2 className="animate-spin ml-2"/>
+                    </div>
+                )}
             </CardHeader>
             <CardContent>
-                <form className="space-y-3">
+                <form onSubmit={onSignupFormSubmit}  className="space-y-3">
                     <Input
                         placeholder='Email'
                         required
                         onChange={(event) => setSignupForm({ ...signupForm, email:event.target.value })}
                         value={signupForm.email}
                         type='email'
-                        disabled={false}
+                        disabled={isPending}
                     />
                     <Input
                         placeholder='password'
@@ -34,25 +50,25 @@ export const SignupCard = () => {
                         onChange={(event) => setSignupForm({ ...signupForm, password: event.target.value })}
                         value={signupForm.password}
                         type='password'
-                        disabled={false}
+                        disabled={isPending}
                     />
                     <Input
                         placeholder='Confirm Password'
                         required
-                        onChange={(event) => { setSignupForm({ ...signupForm, confirmPassword: event.target.value }) }}
+                        onChange={(event) => { setSignupForm({ ...signupForm, confirmPassword: event.target.value }); }}
                         value={signupForm.confirmPassword}
                         type='password'
-                        disabled={false}
+                        disabled={isPending}
                     />
                     <Input
                         placeholder='username'
                         required
-                        onChange={(e) => { setSignupForm({ ...signupForm, username: e.target.value }) }}
+                        onChange={(e) => { setSignupForm({ ...signupForm, username: e.target.value }); }}
                         value={signupForm.username}
                         type='text'
-                        disabled={false}
+                        disabled={isPending}
                     />
-                    <Button disabled={false}
+                    <Button disabled={isPending}
                         size="lg"
                         type="submit"
                         className="w-full"
@@ -68,5 +84,5 @@ export const SignupCard = () => {
                 </p>
             </CardContent>
         </Card>
-    )
-}
+    );
+};

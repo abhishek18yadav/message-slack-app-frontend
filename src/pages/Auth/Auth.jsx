@@ -7,5 +7,5 @@ export const Auth = ({children}) => {
                 {children}
             </div>
         </div>
-    )
-}
+    );
+};
