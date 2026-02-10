@@ -22,6 +22,10 @@ export const signInRequest = async ({ email, password }) => {
         return response.data;
     } catch (error) {
         console.log(error);
-        throw error.response.data;
+        throw (
+          error.response?.data || {
+            message: error.message || "An unknown error occurred",
+          }
+        );
     }
 };

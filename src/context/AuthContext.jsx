@@ -1,7 +1,7 @@
 import { createContext } from "react"
-
+import { useState , useEffect} from "react";
 const AuthContext = createContext();
-export const AuthContextProvider = ({ }) => {
+export const AuthContextProvider = ({children }) => {
     const [auth, setAuth] = useState({
         user: null,
         token: null,
@@ -9,7 +9,7 @@ export const AuthContextProvider = ({ }) => {
     });
     useEffect(() => {
         const user = localStorage.getItem('user');
-        const token = localStorage.setItem('token');
+        const token = localStorage.getItem('token');
         if (user && token) {
             setAuth({
                 user: JSON.parse(user),

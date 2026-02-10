@@ -2,7 +2,7 @@ export default function conbineContext(...providers) {
     return ({ children }) => {
         return providers.reduceRight((accumlator, Currentprovider) => {
             return <Currentprovider>{accumlator}</Currentprovider>
-        }),children
+        }, children)
     }
 }
 

@@ -7,7 +7,7 @@ export const useFetchWorkspace = () => {
     const { auth } = useAuth();
     const { isPending, isSuccess, error, data: workspaces } = useQuery({
         queryFn: () => fetchWorkspaceRequest({ token: auth?.token }),
-        queryKey: 'fetchWorkspace',
+        queryKey: ['fetchWorkspace'],
         staleTime: 30000
     });
     return {
