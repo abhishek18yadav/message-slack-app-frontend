@@ -2,31 +2,30 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useCreateWorkspace } from "@/hooks/api/workspaces/useCreateWorkspace";
-import { useCreateWorkspaceModal } from "@/hooks/context/useCreateWorkspaceModal"
+import { useCreateWorkspaceModal } from "@/hooks/context/useCreateWorkspaceModal";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
 export const CreateWorkspaceModal = () => {
-    console.log("here ,,,,,,,,",useCreateWorkspaceModal());
-    const { openCreateWorkspaceModal, setOPenCreateWorkspaceModal } = useCreateWorkspaceModal();
+    const { openCreateWorkspaceModal, setOpenCreateWorkspaceModal  } = useCreateWorkspaceModal();
     const { isPending, CreateWorkspaceMutation } = useCreateWorkspace();
     const [workspaceName, setWorkspaceName] = useState('');
     const navigate = useNavigate();
     function handleClose() {
-        setOPenCreateWorkspaceModal(false);
+        setOpenCreateWorkspaceModal(false);
     }
     async function handleFormSubmit(e) {
         e.preventDefault();
         try {
             const data = await CreateWorkspaceMutation({ name: workspaceName });
-            console.log('created the workspace ', data);
+            console.log('created the workspace ', typeof(data));
             navigate(`/workspace/${data._id}`);
         } catch (error) {
             console.log('not able to create a new workspace', error);
         } finally {
             setWorkspaceName('');
-            setOPenCreateWorkspaceModal(false);
+            setOpenCreateWorkspaceModal(false);
         }
     }
     return (

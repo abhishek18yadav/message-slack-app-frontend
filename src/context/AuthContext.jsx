@@ -13,9 +13,10 @@ export const AuthContextProvider = ({children }) => {
         if (user && token) {
             setAuth({
                 user: JSON.parse(user),
-                token,
+                token:token,
                 isLoading:false
             })
+            console.log(auth);
         } else {
             setAuth({
                 user: null,

@@ -28,7 +28,8 @@ export const SigninContainer = () => {
         });
     }
     useEffect(()=>{
-        if(isSuccess) {
+        if (isSuccess) {
+            console.log("successfully signed in , now gointo home" , isSuccess);
             setTimeout(() => {
                 navigate('/home');
             }, 3000);

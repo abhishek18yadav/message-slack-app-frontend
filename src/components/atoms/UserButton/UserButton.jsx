@@ -13,9 +13,10 @@ export const UserButton = () => {
         toast.success("successfully signed out");
         navigate('/auth/signin');
     }
-    const { setOpenWorkspaceCreateModal } = useCreateWorkspaceModal();
+    const { setOpenCreateWorkspaceModal } = useCreateWorkspaceModal();
     function openWorkspaceCreateModal() {
-        setOpenWorkspaceCreateModal(true);
+        console.log("setOpenCreateWorkspaceModal is made true");
+        setOpenCreateWorkspaceModal(true);
     }
     return (
         <DropdownMenu>

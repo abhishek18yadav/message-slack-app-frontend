@@ -5,15 +5,17 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useFetchWorkspace = () => {
     const { auth } = useAuth();
-    const { isPending, isSuccess, error, data: workspaces } = useQuery({
+    const { isFetching, isSuccess, error, data: workspaces } = useQuery({
         queryFn: () => fetchWorkspaceRequest({ token: auth?.token }),
         queryKey: ['fetchWorkspace'],
-        staleTime: 30000
+        staleTime: 30000,
+        enabled: !!auth?.token
     });
+
     return {
-        isPending,
-        isSuccess,
-        error,
-        workspaces
-    }
+      isFetching,
+      isSuccess,
+      error,
+      workspaces,
+    };
 }
