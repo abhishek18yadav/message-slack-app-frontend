@@ -15,7 +15,7 @@ export const WorkspaceNavbar = () => {
             <div>
                 <Button size='sm' className="bg-accent/15 w-full justify-start h-7 px-2">
                     <SearchIcon className="size-5 text-white mr-2"/>
-                    <span className="text-white text-xs">Seach{workspace?.name || 'workspace' }</span>
+                    <span className="text-white text-xs">Search{workspace?.name || 'workspace' }</span>
                 </Button>
             </div>
             <div className="ml-auto flex-1 flex items-center justify-end">

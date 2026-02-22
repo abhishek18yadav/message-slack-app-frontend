@@ -9,14 +9,15 @@ import { useEffect } from "react";
 export const WorkspacePanelHeader = ({ workspace }) => {
     console.log('workspace in workspacePanel header is', workspace.members);
     const workspacemembers = workspace?.members;
-    const { openPreference, setOpenPreference,initialValue, setInitialValue} = useWorkspacePreferenceModal();
+    const { openPreference, setOpenPreference, initialValue, setInitialValue } = useWorkspacePreferenceModal();
+    const { setWorkspace } = useWorkspacePreferenceModal();
     const { auth } = useAuth();
     console.log(auth.user._id);
     useEffect(() => {
-        console.log("openPreference is", openPreference);
-    },[openPreference])
+        setWorkspace(workspace);
+    },[])
     const isLoggedInUserAdminOfWorkspace = workspacemembers?.find(
-        (member) => member.memberId === auth?.user?._id && member.role === 'admin'
+        (member) => member.memberId._id === auth?.user?._id && member.role === 'admin'
     );
     console.log("isLoggedInUserAdminOfWorkspace", isLoggedInUserAdminOfWorkspace);
     return (

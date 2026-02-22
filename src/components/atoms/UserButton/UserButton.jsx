@@ -34,7 +34,7 @@ export const UserButton = () => {
                 <DropdownMenuItem>
                     <SettingsIcon className="size-4 mr-2 h-10" />
                     Settings
-                </DropdownMenuItem>\
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleLogout}>
                     <LogOutIcon  className="size-4 mr-2 d-10"/>
                     Logout

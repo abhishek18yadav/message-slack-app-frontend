@@ -31,7 +31,7 @@ export const WorkspaceSwitcher = () => {
     }
   </Button>
 </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent className=' bg-slate-500'>
                 <DropdownMenuItem className="cursor-pointer flex-col justify-start items-start">
                     {workspace?.name}
                     <span className='text-xs text-muted-foreground'>
@@ -43,7 +43,7 @@ export const WorkspaceSwitcher = () => {
                         return null;
                     }
                     return (
-                        <DropdownMenuItem onClick={()=>{ navigate(`/workspaces/${workspace._id}`)}} key={workspace._id} className="cursor-pointer flex-col justify-start items-start" >
+                        <DropdownMenuItem onClick={() => {navigate(`/workspace/${workspace._id}`)}} key={workspace._id} className="cursor-pointer flex-col justify-start items-start" >
                             <p>
                                 {workspace?.name}
                             </p>
