@@ -14,6 +14,7 @@ export default function AppRoutes() {
         <Route path='/auth/signup' element={<Auth><SignupConatiner /></Auth>} />
       <Route path='/home' element={<ProtectedRoute><Home /></ProtectedRoute>} />   
       <Route path="/workspace/:workspaceId" element={<ProtectedRoute><WorkspaceLayout>Workspace</WorkspaceLayout></ProtectedRoute>} />
+      <Route path="/workspace/:workspaceId/channels/:channelId" element={<ProtectedRoute>Channel</ProtectedRoute>} />
         <Route path='*' element={<NotFound />} />  
       </Routes>
   );

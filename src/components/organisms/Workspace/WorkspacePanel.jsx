@@ -1,28 +1,77 @@
+import { SideBarItem } from "@/components/atoms/SideBarItem/SideBarItem";
 import { WorkspacePanelHeader } from "@/components/molecules/workspace/WorkspacePanelHeader";
+import { WorkspacePanelSection } from "@/components/molecules/workspace/WorkspacePanelSection";
 import { useGetWorkspaceById } from "@/hooks/api/workspaces/useGetWorkspaceById";
-import { AlertTriangle, Loader } from "lucide-react";
+import { useCreateChannelModal } from "@/hooks/context/useCreateChannelModal";
+import { AlertTriangle, HashIcon, Loader, MessageSquareTextIcon, SendHorizonalIcon } from "lucide-react";
 import { useParams } from "react-router-dom";
-
+import { useFetchAllChannelsFormWorkspaceId } from "@/hooks/api/channels/useFetchChannelsByWorkspaceId";
 
 export const WorkspacePanel = () => {
     const { workspaceId } = useParams();
-
+    const { setOPenCreateChannelModal,setWorkspaceId } = useCreateChannelModal();
     const { workspace, isFetching, isSuccess } = useGetWorkspaceById(workspaceId);
+    const { channels, isFetching: isFetchingChannels, isSuccess: isSuccessInChannelFetching } = useFetchAllChannelsFormWorkspaceId(workspaceId);
+    
     if (isFetching) {
         return (
             <div className="flex flex-col gap-y-2 h-full items-center justify-center text-white">
-                <Loader className="animate-spin h-6 w-6 text-white"/>
+                <Loader className="animate-spin h-6 w-6 text-white" />
             </div>
         )
     }
     if (!isSuccess) {
         return (
-            <div className="flex flex-col gap-y-2 h-full items-center justify-center text-white"> <AlertTriangle className="h-6 w-6 text-white"/> Something went wrong </div>
+            <div className="flex flex-col gap-y-2 h-full items-center justify-center text-white"> <AlertTriangle className="h-6 w-6 text-white" /> Something went wrong </div>
         )
     }
     return (
         <div className="flex flex-col h-full bg-slack-medium">
-            <WorkspacePanelHeader workspace={workspace}/>
+            <WorkspacePanelHeader workspace={workspace} />
+            <div className="flex flex-col px-2 mt-3 justify-center">
+                <SideBarItem
+                    label="Threads"
+                    icon={MessageSquareTextIcon}
+                    id="threads"
+                    variant='avtive'
+                />
+                <SideBarItem
+                    label="Drafts & Sends"
+                    icon={SendHorizonalIcon}
+                    id="drafts"
+                    variant='default'
+                />
+            </div>
+            <WorkspacePanelSection
+                className="flex justify-center items-center overflow-hidden"
+                label={'Channels'}
+                onIconClick={() => {
+                    // console.log("workspace ID here is ", workspaceId);
+                    setWorkspaceId(workspaceId);
+                    setOPenCreateChannelModal(true);
+                }}
+            >
+                {/* {workspace?.channels?.map((channel) => {
+                    return <SideBarItem key={channel._id} icon={HashIcon} label={channel.name} id={channel._id} />
+                })} */}
+                {isFetchingChannels && (
+                    <div className="flex justify-center">
+                    <Loader className="animate-spin h-4 w-4 text-white" />
+                    </div>
+                )}
+
+                {isSuccessInChannelFetching &&
+                
+                    channels?.data?.data?.channels.map((channel) => (
+                       
+                    <SideBarItem
+                        key={channel._id}
+                        icon={HashIcon}
+                        label={channel.name}
+                        id={channel._id}
+                    />
+                ))}
+            </WorkspacePanelSection>
         </div>
-    )
-}
+    );
+};
