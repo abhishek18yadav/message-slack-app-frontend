@@ -3,9 +3,11 @@ import { AuthContextProvider } from "./AuthContext";
 import { CreateWorkspaceContextProvider } from "./CreateWorkspaceContext";
 import { WorkspacePreferenceModalContextProvider } from "./WorkspacePreferenceModalContext";
 import { CreateChannelContextProvider } from "./CreateChannelContext";
+import { WorkspaceContextProvider } from "./WorkspaceContext";
 export const AppContextProvider = conbineContext(
     AuthContextProvider,
     CreateWorkspaceContextProvider,
     WorkspacePreferenceModalContextProvider,
     CreateChannelContextProvider,
+    WorkspaceContextProvider,
 )

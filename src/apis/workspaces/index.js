@@ -61,3 +61,51 @@ export const updateWorkspaceRequest = async({workspaceId,name,token}) => {
         throw error.response.data;
     }
 }
+export const addChannelToWorkspaceRequest = async ({ workspaceId, channelName, token })=>{
+    try {
+        const response = await axiosConfig.put(
+          `/workspace/${workspaceId}/channels`,
+          { channelName },
+          { headers: { "x-access-token": token } },
+        );
+        return response?.data?.data;
+    } catch (error) {
+        console.log("error in adding channel to workspace req", error);
+        throw error;
+    }
+}
+export const resetJoinCodeRequest = async ({ workspaceId, token }) => {
+    try {
+        const response = await axiosConfig.put(`/workspace/${workspaceId}/joinCode/reset`, {}, { headers: { 'x-access-token': token } });
+        return response?.data?.data;
+    } catch (error) {
+        console.log("error in resetting joinCode request", error);
+        throw error.response.data;
+    }
+}
+export const addMemberToWorkspaceRequest = async ({ workspaceId, token }) => {
+    try {
+        const response = await axiosConfig.put(
+          `/workspace/${workspaceId}/members`,
+          {},
+          { headers: { "x-access-token": token } },
+        );
+        return response?.data?.data;
+    } catch (error) {
+        console.log('error in adding member to workspace request', error);
+        throw error.response.data;
+    }
+}
+export const joinWorkspaceRequest = async ({ workspaceId, joinCode, token }) => {
+    try {
+        const response = await axiosConfig.put(
+          `/workspace/${workspaceId}/join`,
+          { joinCode },
+          { headers: { "x-access-token": token } },
+        );
+        return response?.data?.data;
+    } catch (error) {
+        console.log("error in joining workspace request", error);
+        throw error.response.data;
+    }
+}

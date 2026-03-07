@@ -6,7 +6,7 @@ import { useCreateChannelModal } from "@/hooks/context/useCreateChannelModal";
 import { AlertTriangle, HashIcon, Loader, MessageSquareTextIcon, SendHorizonalIcon } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { useFetchAllChannelsFormWorkspaceId } from "@/hooks/api/channels/useFetchChannelsByWorkspaceId";
-
+import { UserItem } from "@/components/atoms/UserItem/UserItem";
 export const WorkspacePanel = () => {
     const { workspaceId } = useParams();
     const { setOPenCreateChannelModal,setWorkspaceId } = useCreateChannelModal();
@@ -51,16 +51,16 @@ export const WorkspacePanel = () => {
                     setOPenCreateChannelModal(true);
                 }}
             >
-                {/* {workspace?.channels?.map((channel) => {
+                {workspace?.channels?.map((channel) => {
                     return <SideBarItem key={channel._id} icon={HashIcon} label={channel.name} id={channel._id} />
-                })} */}
-                {isFetchingChannels && (
+                })}
+                {/* {isFetchingChannels && (
                     <div className="flex justify-center">
                     <Loader className="animate-spin h-4 w-4 text-white" />
                     </div>
-                )}
+                )} */}
 
-                {isSuccessInChannelFetching &&
+                {/* {isSuccessInChannelFetching &&
                 
                     channels?.data?.data?.channels.map((channel) => (
                        
@@ -70,7 +70,12 @@ export const WorkspacePanel = () => {
                         label={channel.name}
                         id={channel._id}
                     />
-                ))}
+                ))} */}
+            </WorkspacePanelSection>
+            <WorkspacePanelSection >
+                {workspace?.members?.map((item) => {
+                    return <UserItem key={item.memberId._id} label={item.memberId.username} id={item.memberId._id} image={item.memberId.avatar} />
+                })}
             </WorkspacePanelSection>
         </div>
     );
