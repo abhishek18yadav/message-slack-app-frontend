@@ -3,9 +3,10 @@ import { useJoinWorkspaceRequest } from "@/hooks/api/workspaces/useJoinWorkspace
 import { Link, useNavigate, useParams } from "react-router-dom"
 import VerificationInput from "react-verification-input";
 import { toast } from "sonner";
-
+import { useQueryClient } from "@tanstack/react-query";
 export const JoinPage = () => {
     const { workspaceId } = useParams();
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
     const { joinWorkspaceMutation } = useJoinWorkspaceRequest(workspaceId);
     async function handleAddMemberToWorkspace(e) {
@@ -16,6 +17,7 @@ export const JoinPage = () => {
             await joinWorkspaceMutation(joinCode);
             toast.success("You have been added to workspace");
             navigate(`/workspace/${workspaceId}`);
+            queryClient.invalidateQueries(`fetchWorkspaceById-${workspaceId}`);
         } catch (error) {
             console.log("Error in adding member to workspace", error);
         }

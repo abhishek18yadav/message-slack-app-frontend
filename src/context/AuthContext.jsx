@@ -16,7 +16,6 @@ export const AuthContextProvider = ({children }) => {
                 token:token,
                 isLoading:false
             })
-            console.log(auth);
         } else {
             setAuth({
                 user: null,

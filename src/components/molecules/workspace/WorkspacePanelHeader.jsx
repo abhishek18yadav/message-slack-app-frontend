@@ -14,7 +14,6 @@ export const WorkspacePanelHeader = ({ workspace }) => {
     const { openPreference, setOpenPreference, initialValue, setInitialValue } = useWorkspacePreferenceModal();
     const { setWorkspace } = useWorkspacePreferenceModal();
     const { auth } = useAuth();
-    console.log(auth.user._id);
     useEffect(() => {
         setWorkspace(workspace);
     },[])

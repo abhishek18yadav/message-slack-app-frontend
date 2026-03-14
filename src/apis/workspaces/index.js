@@ -24,7 +24,6 @@ export const fetchWorkspaceRequest = async ({ token }) => {
 };
 export const fetchWorkspaceDetailsRequest = async ({ workspaceId, token }) => {
     try {
-        console.log("workspaceId is " , workspaceId)
         const response = await axiosConfig.get(`/workspace/${workspaceId}`, {
             headers: {
                 'x-access-token':token
@@ -45,8 +44,8 @@ export const deleteWorkspaceRequest = async ({workspaceId , token}) => {
         return response?.data?.data;
     }
     catch (error) {
-        console.log("error is", error);
-        throw error.response.data;
+        console.log("error is deleteWorkspaceRequest", error);
+        throw error.response;
     }
 }
 export const updateWorkspaceRequest = async({workspaceId,name,token}) => {

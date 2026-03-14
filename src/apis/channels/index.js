@@ -22,3 +22,16 @@ export const fetchAllChannelsFormWorkspaceId = ({ workspaceId, token }) => {
     throw error;
   }
 }
+export const getChannelById = async ({ channelId, token }) => {
+  try {
+    const response = await axiosConfig.get(`/channels/${channelId}`, {
+      headers: {
+        'x-access-token': token
+      }
+    });
+    return response?.data?.data;
+  } catch (error) {
+    console.log("error in getChannelById request", error);
+    throw error;
+  }
+}

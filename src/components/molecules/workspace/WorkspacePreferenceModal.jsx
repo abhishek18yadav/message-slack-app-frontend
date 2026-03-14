@@ -38,12 +38,10 @@ export const WorkspacePreferenceModal = () => {
     async function handkeDelete() {
         try {
             const ok = await confirmation();
-            console.log('confirmation reciieved',ok);
             if (!ok) {
                 return;
             }
             else {
-                console.log("in else field");
             await deleteWorkspaceMutation();
             navigate('/home');
             queryClient.invalidateQueries('fetchWorkspace');
