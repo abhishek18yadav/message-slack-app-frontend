@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export function Home() {
     const { isFetching, workspaces } = useFetchWorkspace();
     const { setOpenCreateWorkspaceModal } = useCreateWorkspaceModal();
-    // console.log("useFetchWorkspace is ", useFetchWorkspace);
+    console.log("useFetchWorkspace is ", useFetchWorkspace);
     const navigate = useNavigate();
     useEffect(() => {
         if (isFetching) return;

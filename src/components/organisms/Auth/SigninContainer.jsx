@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useAuth } from '@/hooks/context/useAuth.js';
 import { useSignin } from '@/hooks/api/auth/useSignin.js';
 
 import { SigninCard } from './SigninCard.jsx';
@@ -12,6 +12,7 @@ export const SigninContainer = () => {
         email: '',
         password:''
     });
+    const { auth } = useAuth();
     const { isPending, isSuccess, error, signinMutation } = useSignin();
     const [validationError, setValidationError] = useState(null);
     async function onSigninformSubmit(e) {
@@ -31,10 +32,12 @@ export const SigninContainer = () => {
         if (isSuccess) {
             console.log("successfully signed in , now gointo home" , isSuccess);
             setTimeout(() => {
-                navigate('/home');
+                if (auth?.token) {
+                    navigate('/home');
+                }
             }, 3000);
         }
-    }, [isSuccess, navigate]);
+    }, [isSuccess, navigate,auth.token]);
     
     return (
         <SigninCard

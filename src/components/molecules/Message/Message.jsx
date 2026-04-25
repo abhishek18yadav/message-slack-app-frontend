@@ -9,7 +9,7 @@ export const Message = ({ authorIamge, authorName, createdAt, body }) => {
                     <Avatar>
                         <AvatarImage className="rounded-md" src={authorIamge} />
                         <AvatarFallback>
-                            {authorName.charAt(0).toUppercase()}
+                            {authorName.charAt(0).toUpperCase()}
                         </AvatarFallback>
                     </Avatar>
                 </button>
@@ -20,7 +20,7 @@ export const Message = ({ authorIamge, authorName, createdAt, body }) => {
                         </button>
                         <span>&nbsp;&nbsp;</span>
                         <button className="text-xs text-muted-foreground hover:underline">
-                            {createdAt}
+                            {createdAt || 'just now'}
                         </button>
                     </div>
                     <MessageRenderer value={body} />

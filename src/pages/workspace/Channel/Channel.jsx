@@ -5,6 +5,7 @@ import { Loader2Icon, TriangleAlertIcon } from "lucide-react";
 import { useParams } from "react-router-dom"
 import { useSocket } from "@/hooks/context/useSocket";
 import { useEffect } from "react";
+
 export const Channel = () => {
     const { channelId } = useParams();
     const { channelDetails, isFetching, isError } = useGetChannelById(channelId);
